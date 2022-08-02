@@ -1,0 +1,27 @@
+<div>
+<form (ngSubmit)="submitForm()" (input)="showSavedMessage = false" #form="ngForm">
+    <div class="mb-3" style="padding: 20px;">
+      <label for="description" class="form-label" style="padding: 20px;">Description</label>
+      <input type="description" class="form-control" id="description" name="description" [(ngModel)]="values.description" #description="ngModel" required min="10">
+    </div>
+    <div class="mb-3" style="padding: 20px;">
+        <label for="status" class="form-label" style="padding: 20px;">Status</label>
+        <select name="status" [(ngModel)]="values.status" #status="ngModel">
+            <option value="open" selected>Open</option>
+            <option value="close">Close</option>
+        </select>
+      </div>
+    <div class="mb-3" style="padding: 20px;">
+        <label for="assignee" class="form-label" style="padding: 20px;">Assignee</label>
+        <input type="text" class="form-control" id="assignee" name="assignee" [(ngModel)]="values.assignee" #status="ngModel" required>
+      </div>
+    <div class="mb-3" style="margin: 20px;">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+      <div *ngIf="showSavedMessage" class="alert alert-success mt-2">Issue Saved</div>
+    </div>
+  </form>
+</div>
+  <br/>
+  <div>
+  <a href="/">Issues List</a>
+</div>

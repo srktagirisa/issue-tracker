@@ -1,0 +1,9 @@
+<table>
+    <thead><tr><td>Issue Id</td><td>Description</td>
+        <td>Status</td><td>Assignee</td></tr></thead>
+    <tbody *ngFor="let issue of issues">
+      <thead><tr><td>{{issue.id}}</td><td>{{issue!.description}}</td>
+        <td>{{issue!.status}}</td><td>{{issue!.assignee}}</td></tr></thead>
+    </tbody>
+</table>
+<a href="/addIssue">Add Issue</a>
