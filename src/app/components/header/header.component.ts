@@ -10,21 +10,16 @@ import { IssuesApiService } from 'src/app/services/issues-api.service';
 export class HeaderComponent implements OnInit {
   totalIssues: number = 0;
   totalOpenIssues: number = 0;
-  openIssuesPercent: number = 0;
-  issues: Issue[] = [{
-    id: 1,
-    description: "",
-    status: "",
-    assignee: ""
-  }]
+  openIssuesPercentage: number = 0;
+
   constructor(private issuesApiService: IssuesApiService) { }
 
   ngOnInit(): void {
-    this.issuesApiService.fetchAllIssues().subscribe(newIssue => {
-      this.issues = newIssue;
-    })
-    this.issuesApiService.setTotalIssues();
-    this.issuesApiService.totalIssues.subscribe(newTotalIssues => this.totalIssues = newTotalIssues);
+
+    this.issuesApiService.setTotalAndOpenIssues();
+    this.issuesApiService.totalIssues.subscribe(newTotalIssues => {this.totalIssues = newTotalIssues});
+    this.issuesApiService.totalOpenIssues.subscribe(newTotalOpenIssues => {this.totalOpenIssues = newTotalOpenIssues});
+    this.issuesApiService.openIssuesPercentage.subscribe(newOpenIssuesPercentage => {this.openIssuesPercentage = newOpenIssuesPercentage});
   }
   
 }

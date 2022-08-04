@@ -1,9 +1,28 @@
+<div class="alert alert-info" *ngIf="loading">Loading...</div>
+<div>
+    <input type="text" class="form-control searchInput" name="searchInput" id="searchInput" [(ngModel)]="searchInput"/>
+    <button style="margin: 20px;" (click)="filterIssues()">Search</button>
+    <button style="margin-right: 20px;" (click)="reset()">Reset</button>
+    <a style="font-weight: bold;" [routerLink]="['/addIssue']">Add Issue</a>
+</div>
 <table>
-    <thead><tr><td>Issue Id</td><td>Description</td>
-        <td>Status</td><td>Assignee</td></tr></thead>
-    <tbody *ngFor="let issue of issues">
-      <thead><tr><td>{{issue.id}}</td><td>{{issue!.description}}</td>
-        <td>{{issue!.status}}</td><td>{{issue!.assignee}}</td></tr></thead>
+    <thead style="background-color: skyblue;">
+        <tr>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Assignee</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: lightgoldenrodyellow;">
+        
+        <tr *ngFor="let issue of issuesCopy">
+            <td><a [routerLink]="['details/', issue._id]">{{issue!.description}} </a></td>
+            <td *ngIf="issue.status !== 'open'" class="close">{{issue!.status}}</td>
+            <td *ngIf="issue.status === 'open'">
+                <button (click)="closeIssue(issue)"  class="open">{{issue!.status}}</button></td>
+            <td>{{issue!.assignee}}</td>
+
+        </tr>
     </tbody>
 </table>
-<a href="/addIssue">Add Issue</a>
+

@@ -1,4 +1,10 @@
 .container {
     background-color: white;
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "lato", sans-seriff;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
   }

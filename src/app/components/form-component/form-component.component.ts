@@ -8,9 +8,8 @@ import { IssuesApiService } from 'src/app/services/issues-api.service';
   styleUrls: ['./form-component.component.css']
 })
 export class FormComponentComponent implements OnInit {
-
+  loading = false;
   values: Issue = {
-    id: 1,
     description: "",
     status: "",
     assignee: ""
@@ -24,7 +23,16 @@ export class FormComponentComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.issuesApiService.addIssue({ ...this.values });
-    this.showSavedMessage = true;
+    this.loading = true;
+    this.issuesApiService.addIssue({ ...this.values })
+    .subscribe(res => 
+      {
+        this.showSavedMessage = true;
+        this.loading = false;
+        console.log(res);}, 
+      err => {
+      console.log(err);
+    });
+
   }
 }

@@ -8,18 +8,53 @@ import { IssuesApiService } from 'src/app/services/issues-api.service';
   styleUrls: ['./list-component.component.css']
 })
 export class ListComponentComponent implements OnInit {
+  loading = true;
   issues: Issue[] = [{
-    id: 1,
+    _id: "",
     description: "",
     status: "",
     assignee: ""
   }]
+  issuesCopy: Issue[] = [{
+    _id: "",
+    description: "",
+    status: "",
+    assignee: ""
+  }]
+  searchInput: string = "";
 
   constructor(private issuesApiService: IssuesApiService){}
 
   ngOnInit(): void {
+    this.getAllIssues();
+  }
+
+  getAllIssues(): void {
     this.issuesApiService.fetchAllIssues().subscribe(newIssue => {
       this.issues = newIssue;
+      this.issuesCopy = this.issues;
+      this.loading = false;
     })
+  }
+  filterIssues(): void {
+    console.log('query: '+this.searchInput);
+    this.issuesCopy = this.issues.filter((obj => {
+      return obj.status === this.searchInput
+        || obj.assignee === this.searchInput
+        || obj.description.toLocaleLowerCase().includes(this.searchInput);
+    }))
+  }
+
+  reset(): void {
+    this.getAllIssues();
+    this.searchInput = "";
+  }
+  closeIssue(issue: Issue): void {
+    this.issuesApiService.closeIssue(issue).subscribe(res => 
+      { this.loading = true;
+        console.log(res);}, 
+      err => {
+      console.log(err);
+    });
   }
 }

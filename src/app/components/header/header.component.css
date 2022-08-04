@@ -4,4 +4,6 @@ header {
     padding-left: calc(var(--bs-gutter-x) * .5);
     margin-right: calc(var(--bs-gutter-x) * -.5);
     padding-right: calc(var(--bs-gutter-x) * .5);
+    background-color: aquamarine;
+    padding: 10px;
   }
