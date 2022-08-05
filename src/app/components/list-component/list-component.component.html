@@ -1,9 +1,8 @@
 <div class="alert alert-info" *ngIf="loading">Loading...</div>
 <div>
     <input type="text" class="form-control searchInput" name="searchInput" id="searchInput" [(ngModel)]="searchInput"/>
-    <button style="margin: 20px;" (click)="filterIssues()">Search</button>
-    <button style="margin-right: 20px;" (click)="reset()">Reset</button>
-    <a style="font-weight: bold;" [routerLink]="['/addIssue']">Add Issue</a>
+    <button class="btn-primary" (click)="filterIssues()">Search</button>
+    <button class="resetbtn-primary" (click)="reset()">Reset</button>
 </div>
 <table>
     <thead style="background-color: skyblue;">

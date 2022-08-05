@@ -36,11 +36,12 @@ export class ListComponentComponent implements OnInit {
       this.loading = false;
     })
   }
+
   filterIssues(): void {
     console.log('query: '+this.searchInput);
     this.issuesCopy = this.issues.filter((obj => {
-      return obj.status === this.searchInput
-        || obj.assignee === this.searchInput
+      return obj.status.toLocaleLowerCase() === this.searchInput.toLocaleLowerCase()
+        || obj.assignee.toLocaleLowerCase() === this.searchInput.toLocaleLowerCase()
         || obj.description.toLocaleLowerCase().includes(this.searchInput);
     }))
   }
@@ -49,6 +50,7 @@ export class ListComponentComponent implements OnInit {
     this.getAllIssues();
     this.searchInput = "";
   }
+
   closeIssue(issue: Issue): void {
     this.issuesApiService.closeIssue(issue).subscribe(res => 
       { this.loading = true;

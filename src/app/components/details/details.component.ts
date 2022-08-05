@@ -32,11 +32,9 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
     this.issuesApiService.getIssueDetails(params['_id']).subscribe(issueDetails => {
-      console.log("edit issue id: " +params['_id']);
       this.values = {...issueDetails};
       this.issue = issueDetails;
       this.loading = false;
-      console.log("edit issue: " +this.values);
     })
   });
   }
@@ -51,7 +49,6 @@ export class DetailsComponent implements OnInit {
       this.editIssue = false;
       this.issueUpdated = true;
       this.loading = false;
-      console.log("edit issue: " +this.values);
     })
   }
 }

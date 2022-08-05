@@ -3,4 +3,9 @@
     <h2>Total open issues: {{totalOpenIssues}}</h2>
     <h2>Percentage of total open issues: {{openIssuesPercentage | percent}}</h2>
 </div>
+<div style="display: flex;flex: 0 1;">
+    <p><a [routerLink]="['/']">Issues List</a></p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <p><a [routerLink]="['/addIssue']">Add Issue</a></p>
+</div>
 </header>

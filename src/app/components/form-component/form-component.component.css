@@ -1,3 +1,12 @@
-.alert-success{
+.alert-success {
     color: green;
+}
+.valiation-msg {
+    padding: 20px;
+    color: red;
+}
+.btn-primary {
+    background-color: skyblue;
+    border-color: bisque;
+    width: 25%;
 }

@@ -1,16 +1,23 @@
 <div class="alert alert-info" *ngIf="loading">Loading...</div>
-<div style="padding: 20px;margin: 20px; background-color: skyblue;">
-    <p>{{issue.description}}</p>
-    <p>{{issue.status}}</p>
-    <p>{{issue.assignee}}</p>
-    <div><button *ngIf="values!.description" (click)="enableEditIssue()" >Edit issue</button></div>
+<div *ngIf="!loading" style="padding: 20px;margin: 20px; background-color: skyblue;">
+    <p><label for="description" class="form-label" style="padding: 20px;">Description: </label>
+      {{issue.description}}</p>
+    <p><label for="status" class="form-label" style="padding: 20px;">Status: </label>
+    <span style="margin: 45px;">{{issue.status}}</span> </p>
+    <p><label for="assignee" class="form-label" style="padding: 20px;">Assignee: </label>
+      <span style="margin: 20px;">{{issue.assignee}}</span></p>
+    <div><button class="editbtn-primary" *ngIf="values!.description" (click)="enableEditIssue()" >Edit</button></div>
 </div>
 <div *ngIf="issueUpdated" class="alert alert-success mt-2" style="padding: 20px;margin: 20px">Issue Updated</div>
 <div *ngIf="editIssue">
     <form (ngSubmit)="updateIssue()" #form="ngForm">
         <div class="mb-3" style="padding: 20px;">
           <label for="description" class="form-label" style="padding: 20px;">Description</label>
-          <input type="description" class="form-control" id="description" name="description" [(ngModel)]="values.description" #description="ngModel" required min="10">
+          <input type="description" class="form-control" id="description" name="description" [(ngModel)]="values.description" #description="ngModel" required minlength="10">
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger mt-2" >
+            <div *ngIf="description.errors?.['required']" class="valiation-msg">Description is required.</div>
+            <div *ngIf="description.errors?.['minlength']" class="valiation-msg">Description must have minimum 10 characters.</div>
+          </div>
         </div>
         <div class="mb-3" style="padding: 20px;">
             <label for="status" class="form-label" style="padding: 20px;">Status</label>
@@ -18,20 +25,20 @@
                 <option value="open" selected>Open</option>
                 <option value="closed">Close</option>
             </select>
+            <div *ngIf="status.invalid && (status.dirty || status.touched)">
+              <div *ngIf="status.errors?.['required']" class="valiation-msg">Status is required.</div>
+            </div>
           </div>
         <div class="mb-3" style="padding: 20px;">
             <label for="assignee" class="form-label" style="padding: 20px;">Assignee</label>
             <input type="text" class="form-control" id="assignee" name="assignee" style="margin-left: 20px;"
-               [(ngModel)]="values.assignee" #status="ngModel" required>
+               [(ngModel)]="values.assignee" #assignee="ngModel" required>
+            <div *ngIf="assignee.invalid && (assignee.dirty || assignee.touched)">
+                <div *ngIf="assignee.errors?.['required']" class="valiation-msg">Assignee is required.</div>
+            </div>
           </div>
         <div class="mb-3" style="margin-left: 120px;padding: 20px;">
           <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update</button>
         </div>
       </form>
 </div>
-    <div style="margin-left: 120px;padding: 20px;">
-        <a [routerLink]="['/']">Issues List</a>
-      </div>
-      <div style="margin-left: 120px;padding: 20px;">
-        <a [routerLink]="['/addIssue']">Add Issue</a>
-      </div>

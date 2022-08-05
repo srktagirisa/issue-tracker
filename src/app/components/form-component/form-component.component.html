@@ -4,26 +4,32 @@
   <form (ngSubmit)="submitForm()" (input)="showSavedMessage = false" #form="ngForm">
     <div class="mb-3" style="padding: 20px;">
       <label for="description" class="form-label" style="padding: 20px;">Description</label>
-      <input type="description" class="form-control" id="description" name="description" [(ngModel)]="values.description" #description="ngModel" required min="10">
-      <div *ngIf="description.errors?.['required']">Description is required.</div>
+      <input type="description" class="form-control" id="description" name="description" [(ngModel)]="values.description" #description="ngModel" required minlength="10">
+      <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger mt-2" >
+        <div *ngIf="description.errors?.['required']" class="valiation-msg">Description is required.</div>
+        <div *ngIf="description.errors?.['minlength']" class="valiation-msg">Description must have minimum 10 characters.</div>
+      </div>
     </div>
     <div class="mb-3" style="padding: 20px;">
         <label for="status" class="form-label" style="padding: 20px;">Status</label>
-        <select name="status" [(ngModel)]="values.status" #status="ngModel" class="form-control" style="margin-left: 45px;">
+        <select name="status" [(ngModel)]="values.status" #status="ngModel" class="form-control" style="margin-left: 45px;" required>
             <option value="open" selected>Open</option>
             <option value="closed">Close</option>
         </select>
-      </div>
+        </div>
+        <div *ngIf="status.invalid && (status.dirty || status.touched)">
+          <div *ngIf="status.errors?.['required']" class="valiation-msg">Status is required.</div>
+        </div>
     <div class="mb-3" style="padding: 20px;">
         <label for="assignee" class="form-label" style="padding: 20px;">Assignee</label>
         <input type="text" class="form-control" id="assignee" name="assignee" style="margin-left: 20px;"
-           [(ngModel)]="values.assignee" #status="ngModel" required>
+           [(ngModel)]="values.assignee" #assignee="ngModel" required/>
+        <div *ngIf="assignee.invalid && (assignee.dirty || assignee.touched)">
+           <div *ngIf="assignee.errors?.['required']" class="valiation-msg">Assignee is required.</div>
+        </div>
       </div>
     <div class="mb-3" style="margin-left: 120px;padding: 20px;">
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
     </div>
   </form>
-  <div style="margin-left: 120px;padding: 20px;">
-    <a [routerLink]="['/']">Issues List</a>
-  </div>
 </div>

@@ -47,3 +47,13 @@ table {
   tr:nth-child(even) {
     background-color: #dee8f5;
   }
+  .btn-primary {
+    margin: 20px;
+    background-color: skyblue;
+    border-color: bisque;
+  }
+  .resetbtn-primary {
+    margin-right: 20px;
+    background-color: skyblue;
+    border-color: bisque;
+  }
