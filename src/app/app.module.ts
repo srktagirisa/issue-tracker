@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListComponentComponent } from './components/list-component/list-component.component';
@@ -10,6 +10,7 @@ import { DetailsComponentComponent } from './components/details-component/detail
 import { FormComponentComponent } from './components/form-component/form-component.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DetailsComponent } from './components/details/details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { DetailsComponent } from './components/details/details.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    MatNativeDateModule,
-    AppRoutingModule
+    MatMenuModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
