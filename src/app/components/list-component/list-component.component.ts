@@ -52,8 +52,9 @@ export class ListComponentComponent implements OnInit {
   }
 
   closeIssue(issue: Issue): void {
+    this.loading = true;
     this.issuesApiService.closeIssue(issue).subscribe(res => 
-      { this.loading = true;
+      { this.loading = false;
         console.log(res);}, 
       err => {
       console.log(err);
